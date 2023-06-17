@@ -1,0 +1,21 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+
+<div class="jumbotron" style="margin-bottom:0px;">
+  <h1 class="display-4" style="text-align:center;">Hello, Admin</h1>
+  <p class="lead"  style="text-align:center;" >Welcome to Covid Vaccine Management System.</p>
+  <hr class="my-4">
+  <p   style="text-align:center;">Please Login/SignUp to access various features
+  </p>
+  <p class="lead"  style="text-align:center;">
+    <a class="btn btn-danger btn-lg" href="/adminsignup" role="button">SignUp</a>
+    <a class="btn btn-danger btn-lg" href="/adminlogin" role="button">Login</a>
+  </p>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends 'patient_base.html' %}
+{% block content %}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+</head>
+
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">Your Vaccine Appointment</h6>
+    </div>
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+            <th>Patient Name</th>
+            <th>Email-ID</th>
+            <th>Vaccine</th>
+            <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      {% for k in vaccinations %}
+      <tr>
+        <td> {{k.patientName}}</td>
+        <td>{{k.emailid}}</td>
+        <td>{{k.vaccine}}</td>
+        <td>{{k.date}}</td>
+        {%if k.status%}
+        <td> <span class="label label-primary">Confirmed</span></td>
+        {% else %}
+        <td> <span class="label label-success">Pending</span></td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,113 @@
+"""covid URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/3.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path
+from covidvaccinemanagement import views
+from django.contrib.auth.views import LoginView,LogoutView
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',views.home_view,name=''),
+    path('aboutus', views.aboutus_view),
+    path('contactus', views.contactus_view),
+    path('adminclick', views.adminclick_view),
+    path('doctorclick', views.doctorclick_view),
+    path('patientclick', views.patientclick_view),
+    path('adminsignup', views.admin_signup_view),
+    path('doctorsignup', views.doctor_signup_view),
+    path('patientsignup', views.patient_signup_view),
+      
+    path('adminlogin', LoginView.as_view(template_name='adminlogin.html')),
+    path('doctorlogin', LoginView.as_view(template_name='doctorlogin.html')),
+    path('patientlogin', LoginView.as_view(template_name='patientlogin.html')),
+    path('afterlogin', views.afterlogin_view,name='afterlogin'),
+    path('logout/', LogoutView.as_view(template_name='index.html'),name='logout'), 
+    path('admin-dashboard', views.admin_dashboard_view,name='admin-dashboard'),
+    
+    path('admin-doctor', views.admin_doctor_view,name='admin-doctor'),
+    path('admin-view-doctor', views.admin_view_doctor_view,name='admin-view-doctor'),
+    path('delete-doctor-from-hospital/<int:pk>', views.delete_doctor_from_hospital_view,name='delete-doctor-from-hospital'),
+    path('update-doctor/<int:pk>', views.update_doctor_view,name='update-doctor'),
+    path('admin-add-doctor', views.admin_add_doctor_view,name='admin-add-doctor'),
+    path('admin-approve-doctor', views.admin_approve_doctor_view,name='admin-approve-doctor'),
+    path('approve-doctor/<int:pk>', views.approve_doctor_view,name='approve-doctor'),
+    path('reject-doctor/<int:pk>', views.reject_doctor_view,name='reject-doctor'),
+    path('admin-view-doctor-specialisation',views.admin_view_doctor_specialisation_view,name='admin-view-doctor-specialisation'),
+
+    path('admin-patient', views.admin_patient_view,name='admin-patient'),
+    path('admin-view-patient', views.admin_view_patient_view,name='admin-view-patient'),
+    path('delete-patient-from-hospital/<int:pk>', views.delete_patient_from_hospital_view,name='delete-patient-from-hospital'),
+    path('update-patient/<int:pk>', views.update_patient_view,name='update-patient'),
+    path('admin-add-patient', views.admin_add_patient_view,name='admin-add-patient'),
+    path('admin-approve-patient', views.admin_approve_patient_view,name='admin-approve-patient'),
+    path('approve-patient/<int:pk>', views.approve_patient_view,name='approve-patient'),
+    path('reject-patient/<int:pk>', views.reject_patient_view,name='reject-patient'),
+    path('admin-discharge-patient', views.admin_discharge_patient_view,name='admin-discharge-patient'),
+    path('discharge-patient/<int:pk>', views.discharge_patient_view,name='discharge-patient'),
+    path('download-pdf/<int:pk>', views.download_pdf_view,name='download-pdf'),
+    path('download-vaccine-pdf/<int:pk>', views.download_pdf_view2,name='download-vaccine-pdf'),
+   
+    path('admin-appointment', views.admin_appointment_view,name='admin-appointment'),
+    path('admin-view-appointment', views.admin_view_appointment_view,name='admin-view-appointment'),
+    path('admin-add-appointment', views.admin_add_appointment_view,name='admin-add-appointment'),
+    path('admin-approve-appointment', views.admin_approve_appointment_view,name='admin-approve-appointment'),
+    path('approve-appointment/<int:pk>', views.approve_appointment_view,name='approve-appointment'),
+    path('reject-appointment/<int:pk>', views.reject_appointment_view,name='reject-appointment'),
+    path('admin-vaccine-appointment',views.admin_vaccine_appointment_view,name='admin-vaccine-appointment'),
+    path('admin-vaccine-appointment-details',views.admin_vaccine_appointment_details_view,name='admin-vaccine-appointment-details'),
+    path('admin-generate-vaccine-certi',views.admin_generate_vaccine_certi_view,name='admin-generate-vaccine-certi'),
+    path('generate-vaccine-certi/<int:pk>',views.generate_vaccine_certi,name='generate-vaccine-certi'),
+ ]
+
+
+#---------FOR DOCTOR RELATED URLS-------------------------------------
+urlpatterns +=[
+  path('doctor-dashboard', views.doctor_dashboard_view,name='doctor-dashboard'),
+    path('search', views.search_view,name='search'),
+
+    path('doctor-patient', views.doctor_patient_view,name='doctor-patient'),
+    path('doctor-view-patient', views.doctor_view_patient_view,name='doctor-view-patient'),
+    path('doctor-view-discharge-patient',views.doctor_view_discharge_patient_view,name='doctor-view-discharge-patient'),
+
+    path('doctor-appointment', views.doctor_appointment_view,name='doctor-appointment'),
+    path('doctor-view-appointment', views.doctor_view_appointment_view,name='doctor-view-appointment'),
+    path('doctor-delete-appointment',views.doctor_delete_appointment_view,name='doctor-delete-appointment'),
+    path('delete-appointment/<int:pk>', views.delete_appointment_view,name='delete-appointment'),
+    path('doctor-patient-prescription',views.doctor_patient_prescription,name='doctor-patient-prescription'),
+    path('doctor-view-prescription',views.doctor_view_prescription,name='doctor-view-prescription'),
+    path('patient-view-prescription',views.patient_view_prescription,name='patient-view-prescription'),
+
+]
+
+
+
+
+#---------FOR PATIENT RELATED URLS-------------------------------------
+urlpatterns +=[
+
+    path('patient-dashboard', views.patient_dashboard_view,name='patient-dashboard'),
+    path('patient-appointment', views.patient_appointment_view,name='patient-appointment'),
+    path('patient-book-appointment', views.patient_book_appointment_view,name='patient-book-appointment'),
+    path('patient-view-appointment', views.patient_view_appointment_view,name='patient-view-appointment'),
+    path('patient-view-doctor', views.patient_view_doctor_view,name='patient-view-doctor'),
+    path('searchdoctor', views.search_doctor_view,name='searchdoctor'),
+    path('patient-discharge', views.patient_discharge_view,name='patient-discharge'),
+    path('vaccination-appointment', views.vaccination_appointment_view,name='vaccination-appointment'),
+    path('vaccination-appointment-book', views.vaccination_appointment_book_view,name='vaccination-appointment-book'),
+    path('vaccine-view-appointment',views.vaccine_view_appointment,name='vaccine-view-appointment'),
+    path('vaccine-certificate',views.patient_vaccine_view,name='vaccine-certificate'),
+]
+
